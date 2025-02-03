@@ -133,5 +133,27 @@ public class SignUpSignInPage {
             return false;
         }
     }
+    public void typeEmail(String email) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email"))); // עדכון ה-ID לשם הנכון
+        emailField.clear();
+        emailField.sendKeys(email);
+
+    }
+
+    public void typePassword(String password) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password"))); // עדכון ה-ID לשם הנכון
+        passwordField.clear();
+        passwordField.sendKeys(password);
+    }
+    public boolean validateErrorMessage() {
+        try {
+            WebElement errorMessage = driver.findElement(By.id("error-message"));
+            return errorMessage.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 
 }

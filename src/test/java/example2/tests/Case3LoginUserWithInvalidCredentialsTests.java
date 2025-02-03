@@ -2,6 +2,7 @@ package example2.tests;
 
 import all.utils.GenerateDriverAll;
 import example2.actions.Actions;
+import example2.pages.SignUpSignInPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -29,6 +30,19 @@ public class Case3LoginUserWithInvalidCredentialsTests {
     public void loginWithInvalidCredentialsTest() {
         boolean result = actions.loginWithInvalidCredentials();
         Assert.assertTrue(result, "Error message not displayed for invalid login.");
+    }
+    /**
+     * * This method runs after all tests.
+     * * It cleans up the test environment and closes the browser.
+     */
+    @Test(dataProvider = "excelData", dataProviderClass = TestDataProvider.class)
+    public void testInvalidLogin(String email, String password) {
+        System.out.println("Testing login with: " + email + " | " + password);
+        SignUpSignInPage loginPage = new SignUpSignInPage(driver);
+        loginPage.typeEmail(email);
+        loginPage.typePassword(password);
+        loginPage.clickSignIn();
+        Assert.assertTrue(loginPage.validateErrorMessage());
     }
     /**
      * * This method runs after all tests.
