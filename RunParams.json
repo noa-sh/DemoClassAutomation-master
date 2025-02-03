@@ -1,0 +1,10 @@
+{
+  "url": "https://practice.expandtesting.com/forgot-password",
+  "browser": "chrome",
+  "url_form_validation": "https://practice.expandtesting.com/form-validation",
+  "url_for_subscription": "https://automationexercise.com/",
+  "valid_email":    "noa@a.com",
+  "valid_password": "noa",
+  "valid_name":  "noa",
+  "product_name": "Blue Top"
+}
