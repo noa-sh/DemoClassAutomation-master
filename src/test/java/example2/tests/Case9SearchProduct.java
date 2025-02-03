@@ -36,9 +36,8 @@ public class Case9SearchProduct {
 
     @Test(description = "testing the product search", groups = {"smoke", "regression", "search"})
     public void searchProductTest() {
-        //click on the product button
 
-
+        //start the search product test
         boolean result = actions.searchProduct();
         if (result) {
             logger.info("Search product test passed.");

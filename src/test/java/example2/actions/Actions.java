@@ -34,24 +34,45 @@ public class Actions {
         signUpSignInPage = new SignUpSignInPage(driver);
         signUpFormPage = new SignUpFormPage(driver);
     }
-
+    /**
+     * Deletes the account by accessing the delete account page and validating the result.
+     *
+     * @return true if the account is deleted successfully, false otherwise
+     */
     public boolean deleteAccount() {
         homePage.accessDeleteAccount();
         return homePage.validateDeleteAccount();
 
     }
-
+    /**
+     * Searches for a product by accessing the products page, searching for a product, and validating the result.
+     *
+     * @return true if the product is found successfully, false otherwise
+     */
     public boolean searchProduct() {
+        //verify home page is displayed
+        if(homePage.verifyHomePage()){
+            System.out.println("Home page is displayed");
+        }
+        else
+        {
+            System.out.println("Home page is not displayed");
+        }
+        //click on the product button on the home page
         homePage.accessProducts();
+        //verify products page is displayed
        if(   products.verifyProducts()){
            System.out.println("Products page is displayed");
+           //reading product name from json file
            String productName = JsonUtils.readJsonFromFile("product_name");
+           //search product
            products.searchProduct(productName);
            //click search button
            products.clickSearchButton();
             //verify search results
               if( products.verifyProductResult(productName)){
                   System.out.println("Product " + productName + "is displayed successfully");
+                  return true;
               }
               else
               {
@@ -69,7 +90,11 @@ public class Actions {
 
     }
 
-
+    /**
+     * Logs in with valid credentials by typing the email, password, clicking submit, and validating the result.
+     *
+     * @return true if the login is successful, false otherwise
+     */
     public boolean loginValidCredentials() {
         String email = JsonUtils.readJsonFromFile("valid_email");
         String password = JsonUtils.readJsonFromFile("valid_password");
@@ -100,7 +125,12 @@ public class Actions {
         forgotPassword.clickSubmit();
         return forgotPassword.validateForgotPassword();
     }
-
+    /**
+     * Performs the forgot password action by typing the email, clicking submit, and validating the result.
+     *
+     * @param email the email to be typed in the forgot password form
+     * @return true if the forgot password functionality is validated successfully, false otherwise
+     */
     public boolean doForgotPasswordFromExcel(String email) {
         forgotPassword.typeEmail(email);
         forgotPassword.clickSubmit();
@@ -130,18 +160,27 @@ public class Actions {
     public boolean doSubscription(String email) {
         return automationExercisePage.fillSubscription(email);
     }
-
+    /**
+     * verify the home page
+     * @return  boolean
+     */
     public boolean verifyHomePage() {
 
         return homePage.verifyHomePage();
     }
-
+    /**
+     * verify the sing up page
+     * @return  boolean
+     */
     public boolean accessVerifySignInSignUpPage() {
         homePage.accessSignUp();
         return homePage.verifyAccessSignInSignUpPage();
 
     }
-
+    /**
+     * verify starting sign up
+     * @return  boolean
+     */
     public boolean verifyStartingSignUp() {
         int randomInt = RandomUtils.getRandomInt(6);
         String name = "Auto Test User " + randomInt;
@@ -151,7 +190,10 @@ public class Actions {
         signUpSignInPage.clickSignUp();
         return signUpSignInPage.verifyStartingSignUp(name, email);
     }
-
+    /**
+     * verify filling sign up
+     * @return  boolean
+     */
     public boolean verifyFillingSignUp() {
 
         signUpFormPage.selectTitle("woman");
@@ -179,10 +221,18 @@ public class Actions {
         }
         return results;
     }
+    /**
+     * verify filling sign up
+     * @return  boolean
+     */
     public String getChromeCpuValue() {
         TableTaskPage tableTaskPage = new TableTaskPage(driver);
         return tableTaskPage.getChromeCpuValue();
     }
+    /**
+     * login with invalid credentials
+     * @return  boolean
+     */
     public boolean loginInvalidCredentials() {
         String email = "wrongemail@example.com";
         String password = "wrongpassword";
@@ -200,7 +250,10 @@ public class Actions {
         }
         return false;
     }
-
+    /**
+     * login with invalid credentials
+     * @return  boolean
+     */
     public boolean loginWithInvalidCredentials() {
         String invalidEmail = "invalid@test.com"; // * Define an invalid email
         String invalidPassword = "wrongpassword"; // * Define an incorrect password
@@ -234,6 +287,10 @@ public class Actions {
         }
         return results;
     }
+    /**
+     * login with valid credentials
+     * @return  boolean
+     */
     public boolean loginWithValidCredentials() {
         String validEmail = JsonUtils.readJsonFromFile("valid_email"); // * Retrieve a valid email from JSON file
         String validPassword = JsonUtils.readJsonFromFile("valid_password"); // * Retrieve a valid password from JSON file
