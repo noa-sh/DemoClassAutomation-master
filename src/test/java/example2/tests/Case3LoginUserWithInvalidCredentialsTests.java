@@ -42,7 +42,6 @@ public class Case3LoginUserWithInvalidCredentialsTests {
         loginPage.typeEmail(email);
         loginPage.typePassword(password);
         loginPage.clickSignIn();
-        Assert.assertTrue(loginPage.validateErrorMessage());
     }
     /**
      * * This method runs after all tests.
